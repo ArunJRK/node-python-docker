@@ -1,0 +1,31 @@
+# Starting from a Node 18 image on Linux Alpine
+FROM --platform=linux/amd64 node:18-alpine
+
+# Update and upgrade apk packages, then install Python
+RUN apk update --no-cache && \
+    apk upgrade --no-cache && \
+    apk add --no-cache \
+    python3 \
+    g++ \
+    build-base \
+    cairo-dev \
+    jpeg-dev \
+    pango-dev \
+    musl-dev \
+    giflib-dev \
+    pixman-dev \
+    pangomm-dev \
+    libjpeg-turbo-dev \
+    freetype-dev && \
+    npm i -g npm && \
+    npm cache clean --force && \
+    ln -sf python3 /usr/bin/python && \
+    python3 -m ensurepip && \
+    pip3 install --no-cache --upgrade pip setuptools && \
+    rm -r /usr/lib/python*/ensurepip && \
+    find / -type d -name '__pycache__' -exec rm -rf {} + && \
+    rm -rf /var/cache/apk/* && \
+    rm -rf /root/.cache && \
+    rm -rf /tmp/* && \
+    rm -rf /var/log/* && \
+    rm -rf /var/tmp/* 
