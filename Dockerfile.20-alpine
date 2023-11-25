@@ -9,8 +9,6 @@ RUN apk update --no-cache && \
     apk add --no-cache \
     python3 && \
     npm i -g npm && \
-    yarn add canvas && \
-    yarn cache clean && \
     npm cache clean --force && \
     ln -sf python3 /usr/bin/python && \
     python3 -m ensurepip && \
